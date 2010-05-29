@@ -1,8 +1,11 @@
+#
+%define		ppp_version	2.4.5
+#
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
 Version:	0.8
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/0.8/%{name}-%{version}.tar.bz2
@@ -20,9 +23,9 @@ BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libglade2-devel >= 2.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	ppp-plugin-devel
+BuildRequires:	ppp-plugin-devel >= 3:%{ppp_version}
 Requires:	NetworkManager >= 0.8
-Requires:	ppp
+Requires:	ppp = 3:%{ppp_version}
 Requires:	pptp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +45,8 @@ Integracja NetworkManagera z protokołem PPTP.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--with-pppd-plugin-dir=%{_libdir}/pppd/%{ppp_version}
 %{__make}
 
 %install
@@ -52,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/NetworkManager/*.{a,la}
-rm -rf $RPM_BUILD_ROOT%{_libdir}/pppd/2.4.4/*.{a,la}
+rm -rf $RPM_BUILD_ROOT%{_libdir}/pppd/*.*.*/*.{a,la}
 
 %find_lang %{name}
 
@@ -65,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-pptp-properties.so
 %attr(755,root,root) %{_libdir}/nm-pptp-auth-dialog
 %attr(755,root,root) %{_libdir}/nm-pptp-service
-%attr(755,root,root) %{_libdir}/pppd/2.4.4/nm-pptp-pppd-plugin.so
+%attr(755,root,root) %{_libdir}/pppd/%{ppp_version}/nm-pptp-pppd-plugin.so
 %{_sysconfdir}/NetworkManager/VPN/nm-pptp-service.name
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/nm-pptp-service.conf
 %{_datadir}/gnome-vpn-properties/pptp
