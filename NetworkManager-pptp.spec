@@ -17,10 +17,10 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-keyring-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libglade2-devel >= 2.0
+BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	ppp-plugin-devel >= 3:%{ppp_version}
@@ -71,5 +71,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/nm-pptp-service
 %attr(755,root,root) %{_libdir}/pppd/%{ppp_version}/nm-pptp-pppd-plugin.so
 %{_sysconfdir}/NetworkManager/VPN/nm-pptp-service.name
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/nm-pptp-service.conf
+%config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/nm-pptp-service.conf
 %{_datadir}/gnome-vpn-properties/pptp
