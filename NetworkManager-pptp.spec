@@ -4,12 +4,12 @@
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
-Version:	0.8
-Release:	2
+Version:	0.8.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/0.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	f87226c2d56c920617b53cf429e0c4b6
+# Source0-md5:	3eb00a9c5dc7e50fe76119da914148bc
 URL:		http://projects.gnome.org/NetworkManager/
 BuildRequires:	GConf2-devel >= 2.0
 BuildRequires:	NetworkManager-devel >= 0.8
