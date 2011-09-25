@@ -6,7 +6,7 @@ Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
 Version:	0.9.0
 Release:	1
-License:	GPL v2
+License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/0.9/%{name}-%{version}.tar.bz2
 # Source0-md5:	38cf737d5fbd2b4bd03a5b3fb55da252
@@ -24,6 +24,7 @@ BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	ppp-plugin-devel >= 3:%{ppp_version}
 Requires:	NetworkManager >= 2:0.9.0
+Requires:	dbus-glib >= 0.74
 Requires:	ppp = 3:%{ppp_version}
 Requires:	pptp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,6 +46,7 @@ Integracja NetworkManagera z protokołem PPTP.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-static \
 	--with-pppd-plugin-dir=%{_libdir}/pppd/%{ppp_version}
 %{__make}
 
@@ -54,8 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_libdir}/NetworkManager/*.{a,la}
-rm -rf $RPM_BUILD_ROOT%{_libdir}/pppd/*.*.*/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/NetworkManager/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/pppd/*.*.*/*.la
 
 %find_lang %{name}
 
