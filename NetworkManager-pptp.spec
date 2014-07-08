@@ -1,29 +1,33 @@
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
-Version:	0.9.8.4
-Release:	2
+Version:	0.9.10.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/0.9/%{name}-%{version}.tar.xz
-# Source0-md5:	2d1f48ab2383aaba1cc4acb43a187320
+# Source0-md5:	767fc3d4a3c86cb4b85abe1d5e21f78f
 URL:		http://projects.gnome.org/NetworkManager/
-BuildRequires:	GConf2-devel >= 2.0
-BuildRequires:	NetworkManager-devel >= 2:0.9.8.4
+BuildRequires:	NetworkManager-devel >= 2:0.9.10.0
+BuildRequires:	NetworkManager-gtk-lib-devel >= 0.9.10.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	glib2-devel >= 1:2.32
+BuildRequires:	gtk+3-devel >= 3.4
 BuildRequires:	intltool >= 0.35.0
-BuildRequires:	libgnome-keyring-devel
+BuildRequires:	libsecret-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	ppp-plugin-devel >= 3:2.4.5
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-Requires:	NetworkManager >= 2:0.9.8.4
+Requires:	NetworkManager >= 2:0.9.10.0
+Requires:	NetworkManager-gtk-lib >= 0.9.10.0
 Requires:	dbus-glib >= 0.74
+Requires:	glib2 >= 1:2.32
+Requires:	gtk+3 >= 3.4
 %requires_eq	ppp
 Requires:	pptp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
