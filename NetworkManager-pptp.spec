@@ -1,18 +1,17 @@
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
-Version:	1.0.8
+Version:	1.2.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/1.0/%{name}-%{version}.tar.xz
-# Source0-md5:	49184fad96b5c8c43d7ac86b97790566
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
+# Source0-md5:	e1d0021eff80fcf6ad1c445b4fa0451d
 URL:		https://wiki.gnome.org/Projects/NetworkManager
-BuildRequires:	NetworkManager-devel >= 2:1.0.0
-BuildRequires:	NetworkManager-gtk-lib-devel >= 1.0.6
+BuildRequires:	NetworkManager-devel >= 2:1.2.0
+BuildRequires:	NetworkManager-gtk-lib-devel >= 1.2.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.32
 BuildRequires:	gtk+3-devel >= 3.4
@@ -25,7 +24,6 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	NetworkManager >= 2:1.0.0
 Requires:	NetworkManager-gtk-lib >= 1.0.6
-Requires:	dbus-glib >= 0.74
 Requires:	glib2 >= 1:2.32
 Requires:	gtk+3 >= 3.4
 %requires_eq	ppp
@@ -70,10 +68,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
+%attr(755,root,root) %{_libdir}/NetworkManager/libnm-vpn-plugin-pptp.so
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-pptp-properties.so
 %attr(755,root,root) %{_libdir}/nm-pptp-auth-dialog
 %attr(755,root,root) %{_libdir}/nm-pptp-service
 %attr(755,root,root) %{_libdir}/pppd/plugins/nm-pptp-pppd-plugin.so
 %{_sysconfdir}/NetworkManager/VPN/nm-pptp-service.name
+%{_libdir}/NetworkManager/VPN/nm-pptp-service.name
 %config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/nm-pptp-service.conf
+%{_datadir}/appdata/network-manager-pptp.metainfo.xml
 %{_datadir}/gnome-vpn-properties/pptp
