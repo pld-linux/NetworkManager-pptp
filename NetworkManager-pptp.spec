@@ -2,7 +2,7 @@ Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
 Version:	1.2.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/nm-pptp-service
 %attr(755,root,root) %{_libdir}/pppd/plugins/nm-pptp-pppd-plugin.so
 %{_sysconfdir}/NetworkManager/VPN/nm-pptp-service.name
-%{_libdir}/NetworkManager/VPN/nm-pptp-service.name
+%{_prefix}/lib/NetworkManager/VPN/nm-pptp-service.name
 %config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/nm-pptp-service.conf
 %{_datadir}/appdata/network-manager-pptp.metainfo.xml
 %{_datadir}/gnome-vpn-properties/pptp
