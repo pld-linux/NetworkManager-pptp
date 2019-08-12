@@ -2,7 +2,7 @@ Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
 Version:	1.2.8
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
@@ -50,7 +50,8 @@ Integracja NetworkManagera z protokołem PPTP.
 %configure \
 	--disable-silent-rules \
 	--disable-static \
-	--with-pppd-plugin-dir=%{_libdir}/pppd/plugins
+	--with-pppd-plugin-dir=%{_libdir}/pppd/plugins \
+	--without-libnm-glib
 %{__make}
 
 %install
@@ -72,11 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-vpn-plugin-pptp.so
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-vpn-plugin-pptp-editor.so
-%attr(755,root,root) %{_libdir}/NetworkManager/libnm-pptp-properties.so
 %attr(755,root,root) %{_libdir}/pppd/plugins/nm-pptp-pppd-plugin.so
 %attr(755,root,root) %{_libexecdir}/nm-pptp-auth-dialog
 %attr(755,root,root) %{_libexecdir}/nm-pptp-service
-%{_sysconfdir}/NetworkManager/VPN/nm-pptp-service.name
 %{_prefix}/lib/NetworkManager/VPN/nm-pptp-service.name
 %config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/nm-pptp-service.conf
 %{_datadir}/appdata/network-manager-pptp.metainfo.xml
