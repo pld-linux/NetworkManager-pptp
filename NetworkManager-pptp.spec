@@ -1,19 +1,20 @@
+# TODO: GTK4 variant for GNOME42 (--with-gtk4, requires libnma-gtk4 >= 1.8.33)
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
-Version:	1.2.8
-Release:	4
+Version:	1.2.10
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
-# Source0-md5:	305e31d6aac41813d735f27891fce6d8
+Source0:	https://download.gnome.org/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
+# Source0-md5:	4cb83dbea925ca5ca3af9110b3949a21
 URL:		https://wiki.gnome.org/Projects/NetworkManager
 BuildRequires:	NetworkManager-devel >= 2:1.2.0
 BuildRequires:	NetworkManager-gtk-lib-devel >= 1.2.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.32
+BuildRequires:	glib2-devel >= 1:2.34
 BuildRequires:	gtk+3-devel >= 3.4
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libsecret-devel >= 0.18
@@ -24,7 +25,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	NetworkManager >= 2:1.0.0
 Requires:	NetworkManager-gtk-lib >= 1.0.6
-Requires:	glib2 >= 1:2.32
+Requires:	glib2 >= 1:2.34
 Requires:	gtk+3 >= 3.4
 Requires:	libsecret >= 0.18
 %requires_eq	ppp
@@ -77,5 +78,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/nm-pptp-auth-dialog
 %attr(755,root,root) %{_libexecdir}/nm-pptp-service
 %{_prefix}/lib/NetworkManager/VPN/nm-pptp-service.name
-%config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/nm-pptp-service.conf
-%{_datadir}/appdata/network-manager-pptp.metainfo.xml
+%{_datadir}/dbus-1/system.d/nm-pptp-service.conf
+%{_datadir}/metainfo/network-manager-pptp.metainfo.xml
