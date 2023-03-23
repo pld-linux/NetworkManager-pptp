@@ -1,24 +1,28 @@
-# TODO: GTK4 variant for GNOME42 (--with-gtk4, requires libnma-gtk4 >= 1.8.33)
+#
+# Conditional build:
+%bcond_without	gtk4	# Gtk4 version of editor plugin (GNOME 42+)
+
 Summary:	NetworkManager VPN integration for PPTP
 Summary(pl.UTF-8):	Integracja NetworkManagera z protokołem PPTP
 Name:		NetworkManager-pptp
-Version:	1.2.10
+Version:	1.2.12
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/NetworkManager-pptp/1.2/%{name}-%{version}.tar.xz
-# Source0-md5:	4cb83dbea925ca5ca3af9110b3949a21
+# Source0-md5:	cde35b1d92b2a1f49118a59547be3e60
 URL:		https://wiki.gnome.org/Projects/NetworkManager
 BuildRequires:	NetworkManager-devel >= 2:1.2.0
 BuildRequires:	NetworkManager-gtk-lib-devel >= 1.2.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	glib2-devel >= 1:2.34
 BuildRequires:	gtk+3-devel >= 3.4
-BuildRequires:	intltool >= 0.35.0
+%{?with_gtk4:BuildRequires:	gtk4-devel >= 4.0}
+%{?with_gtk4:BuildRequires:	libnma-gtk4-devel >= 1.8.33}
 BuildRequires:	libsecret-devel >= 0.18
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
 BuildRequires:	ppp-plugin-devel >= 3:2.4.5
 BuildRequires:	tar >= 1:1.22
@@ -42,7 +46,6 @@ Integracja NetworkManagera z protokołem PPTP.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
@@ -51,8 +54,8 @@ Integracja NetworkManagera z protokołem PPTP.
 %configure \
 	--disable-silent-rules \
 	--disable-static \
-	--with-pppd-plugin-dir=%{_libdir}/pppd/plugins \
-	--without-libnm-glib
+	%{?with_gtk4:--with-gtk4} \
+	--with-pppd-plugin-dir=%{_libdir}/pppd/plugins
 %{__make}
 
 %install
@@ -71,9 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README TODO
+%doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-vpn-plugin-pptp.so
 %attr(755,root,root) %{_libdir}/NetworkManager/libnm-vpn-plugin-pptp-editor.so
+%if %{with gtk4}
+%attr(755,root,root) %{_libdir}/NetworkManager/libnm-gtk4-vpn-plugin-pptp-editor.so
+%endif
 %attr(755,root,root) %{_libdir}/pppd/plugins/nm-pptp-pppd-plugin.so
 %attr(755,root,root) %{_libexecdir}/nm-pptp-auth-dialog
 %attr(755,root,root) %{_libexecdir}/nm-pptp-service
